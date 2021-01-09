@@ -1,29 +1,57 @@
-CRLAN14
+CRlab14
 
-1) git clone url
+_________________________________________________________________________________________________________________________________________________________________________________________________________
+
+1) git clone url (téléchargement des fichier qui constiturons le noyau)
 
 2)cd linux et après checkout remotes/origin/4.19 -b 4.19
 
 3)sudo apt install tree
 
-4)tree -L 1 (affiche l'arborescence du répertoire linux)
+4)tree -L 1 (affiche le premier étage de l'arborescence du répertoire linux)
 
-5) ls -l --sort=size le répertoire le plus volumineux est le répertoire MAINTAINERS, ce fichier contient des fonctions qui permettent de gérer le noyau, répertoire de docutaition
+5) ls -l --sort=size le répertoire le plus volumineux est le répertoire documentation qui contient des explications sur le noyau linux et son fonctionnement.
 
-6-7) ls * | grep bb
-cp le nom du fichier asssoié au déconfig 
-cd ../..linux make 
-make nom_copier_deconfig
+6-7) 
+cd arch/arm/configs (ce répertoire contient tout les fichier de cinfiguration des différentes cartes compatible avec le noyau Linux)
+ls * | grep bb (recherche de la beagle board initiale bb)
+
+affiche:
+bb.org_defconfig (fichier de configuration de la carte beagle board)
+
+Après être retourner dan le répertoire linux on tape la commande:
+make bb.org_deconfig pour créer le fichier de configuration de la beagle board (.config)
+
+affiche:
+
+#
+# configuration written to .config
+#
+
+Donc cela semble fonctionner
 
 8)
+vim .config affiche un fichier texte ainsi nous vérifions bien qu'un fichier .config a été générer, il n'agit de la configuration du noyau nous avons des toutes les options activées.
 
-9)-10-11-12-13)xconfig (affiche une interface graphique)
-vim .config après faire / pour chercher
+Exemple:
+CONFIG_ARM=y
+CONFIG_ARM_HAS_SG_CHAIN=y
+CONFIG_MIGHT_HAVE_PCI=y
+CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+CONFIG_HAVE_PROC_CPU=y
 
-make -j 4 (permet de compiler le noyau) j -4 permet d'accelerer la compilation
-affiche kernel is ready et affiche bien les 2 fichiers
 
-15) cp arch/arm/boots/dts/am335x-boneblack.dtb /var/lib/tftpboot/am335x-boneblack.dtb
+9)-10-11-12-13)
+make xconfig (affiche une interface graphique permettant de configurer le noyau linux)
+
+14) Après avoir reconfigurer le noyau il faut le compiler.
+ 
+commande: make -j 4 (j -4 permet d'accelerer la compilation)
+affiche kernel is ready et affiche bien les 2 fichiers zImage et am335x-boneblack.dtb
+
+15)
+
+ cp arch/arm/boots/dts/am335x-boneblack.dtb /var/lib/tftpboot/am335x-boneblack.dtb
 cp arch/arm/boots/dts/zImage /var/lib/tftpboot/zImage
  
 
