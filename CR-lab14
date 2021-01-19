@@ -13,7 +13,7 @@ ________________________________________________________________________________
 5) ls -l --sort=size le répertoire le plus volumineux est le répertoire documentation qui contient des explications sur le noyau linux et son fonctionnement.
 
 6-7) 
-cd arch/arm/configs (ce répertoire contient tout les fichier de cinfiguration des différentes cartes compatible avec le noyau Linux)
+cd arch/arm/configs (ce répertoire contient tout les fichiers de configuration des différentes cartes compatible avec le noyau Linux)
 ls * | grep bb (recherche de la beagle board initiale bb)
 
 affiche:
@@ -31,7 +31,7 @@ affiche:
 Donc cela semble fonctionner
 
 8)
-vim .config affiche un fichier texte ainsi nous vérifions bien qu'un fichier .config a été générer, il n'agit de la configuration du noyau nous avons des toutes les options activées.
+vim .config affiche un fichier texte ainsi nous vérifions bien qu'un fichier .config a été générer, il s'agit de la configuration du noyau, nous avons des toutes les options activées.
 
 Exemple:
 CONFIG_ARM=y
